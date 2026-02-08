@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إلى زهراء ❤️</title>
+    <style>
+        body {
+            margin: 0; padding: 0;
+            background: #000 url('https://w0.peakpx.com/wallpaper/598/430/HD-wallpaper-night-city-anime-city-aesthetic-anime-night.jpg') no-repeat center center fixed;
+            background-size: cover; height: 100vh;
+            display: flex; justify-content: center; align-items: center;
+            font-family: 'Arial', sans-serif; overflow: hidden; color: white;
+        }
+        body::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 0; }
+
+        #container { position: relative; z-index: 2; text-align: center; width: 90%; }
+        
+        /* تصميم الصورة الدائرية بحدود بيضاء مثل طلبك */
+        .panda-circle {
+            width: 170px; height: 170px; border-radius: 50%;
+            border: 6px solid white; object-fit: cover;
+            margin-bottom: 25px; display: block; margin-left: auto; margin-right: auto;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+        }
+
+        h1 { font-size: 1.6rem; line-height: 1.6; text-shadow: 2px 2px 10px #000; }
+        .btns { display: flex; justify-content: center; gap: 15px; margin-top: 20px; height: 50px; }
+        
+        button { padding: 10px 30px; font-size: 1.1rem; border-radius: 20px; border: none; cursor: pointer; font-weight: bold; transition: 0.2s; }
+        #yesBtn { background: white; color: black; }
+        #noBtn { background: rgba(255,255,255,0.2); color: white; backdrop-filter: blur(5px); border: 1px solid white; }
+
+        #mainContent, #thanksScreen, #finalContent { display: none; }
+        #percent { font-size: 3rem; color: #74b9ff; font-weight: bold; margin-top: 15px; }
+
+        /* فقاعات الخلفية */
+        .bubble { position: absolute; bottom: -100px; background: rgba(255, 255, 255, 0.1); border-radius: 50%; animation: floatUp 8s infinite linear; z-index: 1; }
+        @keyframes floatUp { to { transform: translateY(-120vh); } }
+    </style>
+</head>
+<body onclick="startApp()">
+
+    <div id="startScreen" style="text-align:center; z-index:2;">
+        <h1 style="font-size: 4rem;">❤️</h1>
+        <h1>إلى زهراء</h1>
+        <p>(اضغطي على الشاشة)</p>
+    </div>
+
+    <div id="mainContent">
+        <div id="container">
+            <img id="pandaImg" src="https://c.tenor.com/2pC8X6X8z8EAAAAC/mochi-peach-cat.gif" class="panda-circle">
+            <h1 id="questionText">هل تحبيني يا زهراء؟ 🥺</h1>
+            <div class="btns">
+                <button id="yesBtn" onclick="event.stopPropagation(); handleYes()">نعم</button>
+                <button id="noBtn" onmouseover="moveNo()" onclick="event.stopPropagation(); moveNo()">لا</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="thanksScreen" onclick="event.stopPropagation(); goToEnd()">
+        <div id="container">
+            <img src="https://c.tenor.com/Y36_Rshq7uIAAAAC/mochi-peach-cat.gif" class="panda-circle">
+            <h1>شكراً 🌹</h1>
+            <p>(اضغطي على الشاشة)</p>
+        </div>
+    </div>
+
+    <div id="finalContent">
+        <div id="container">
+            <img src="https://c.tenor.com/0vM089E_9vAAAAAC/milk-and-mocha.gif" class="panda-circle">
+            <h1 id="loveWords">
+                انا احبككككككك<br>
+                حبببببببب قد كون<br>
+                احبككك!!!<br>
+                🥺🥺💞💞🫶🏻🫶🏻
+            </h1>
+            <div id="percent">0%</div>
+        </div>
+    </div>
+
+    <script>
+        let step = 0;
+        let confirmed = false;
+        const questions = [
+            "هل تحبيني يا زهراء؟ 🥺",
+            "انتي متأكدة ماتحبيني؟ 🥺",
+            "ارجوووووووك 🥲",
+            "عادي اصلا ماريد اعرف<br>لاني اعرف انك تحبيني!! 😝"
+        ];
+
+        // فقاعات عشوائية
+        for(let i=0; i<10; i++){
+            let b = document.createElement('div');
+            b.className = 'bubble';
+            let s = Math.random()*50 + 20 + 'px';
+            b.style.width = s; b.style.height = s;
+            b.style.left = Math.random()*100 + 'vw';
+            b.style.animationDuration = Math.random()*5 + 5 + 's';
+            document.body.appendChild(b);
+        }
+
+        function startApp() {
+            if(document.getElementById('startScreen').style.display !== 'none') {
+                document.getElementById('startScreen').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+            }
+        }
+
+        function handleYes() {
+            if (!confirmed) {
+                document.getElementById('questionText').innerText = "متأكدة؟ 😍";
+                confirmed = true;
+            } else {
+                document.getElementById('mainContent').style.display = 'none';
+                document.getElementById('thanksScreen').style.display = 'block';
+            }
+        }
+
+        function moveNo() {
+            const noBtn = document.getElementById('noBtn');
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+            noBtn.style.top = Math.random() * (window.innerHeight - 50) + 'px';
+            step++;
+            if (step < questions.length) {
+                document.getElementById('questionText').innerHTML = questions[step];
+            }
+        }
+
+        function goToEnd() {
+            document.getElementById('thanksScreen').style.display = 'none';
+            document.getElementById('finalContent').style.display = 'block';
+            startCounter();
+        }
+
+        function startCounter() {
+            let count = 0;
+            const target = 1000000;
+            const timer = setInterval(() => {
+                count += Math.floor(Math.random() * 50000) + 10000;
+                if (count >= target) { count = target; clearInterval(timer); }
+                document.getElementById('percent').innerText = count.toLocaleString() + "% 💙";
+            }, 50);
+        }
+    </script>
+</body>
+</html>
